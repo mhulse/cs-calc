@@ -1,19 +1,38 @@
-Trim Size:
-
-Width:
-<input type="text">
-
-Height:
-<input type="text">
-
-Bleed:
-<input type="text" value="0.125">
-
-Paper thickness:
-<input type="text" value="0.002347">
-
-Page count:
-<input type="text" value="101">
+<form id="calculator" novalidate>
+	
+	<p>
+		Trim width:
+		<input type="text" v-model="width">
+		inches
+	</p>
+	
+	<p>
+		Trim height:
+		<input type="text" v-model="height">
+		inches
+	</p>
+	
+	<p>
+		Bleed:
+		<input type="text" v-model="bleed" value="0.125">
+		inches
+	</p>
+	
+	<p>
+		Paper thickness:
+		<input type="text" v-model="thickness" value="0.002347">
+		inches
+	</p>
+	
+	<p>
+		Page count:
+		<input type="text" v-model="count" value="101">
+		inches
+	</p>
+	
+	<p><pre>data: {{ $data | json 2 }}</pre></p>
+	
+</form>
 
 <hr>
 
@@ -25,3 +44,21 @@ Spread dimensions with spine:
 
 Width: (8.625" + 8.625" + .237047") = 17.487047"
 Height: 8.75"
+
+<script src="https://unpkg.com/vue@2.1.3/dist/vue.min.js"></script>
+<script src="https://cdn.rawgit.com/vuejs/vue-validator/dev/dist/vue-validator.js"></script>
+
+<script>
+	
+	new Vue({
+		el: '#calculator',
+		data: {
+			width: '0',
+			height: '0',
+			bleed: '0',
+			thickness: '0',
+			count: '0',
+		}
+	});
+	
+</script>
