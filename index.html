@@ -250,9 +250,10 @@
 		methods: {
 			calculate: function() {
 				this.$nextTick(function() {
+					var count = ((this.count % 2 == 0) ? this.count : this.count + 1);
 					var width = (this.width + this.bleed);
 					var height = (this.height + (this.bleed * 2));
-					var spine = (this.count * this.paper);
+					var spine = (count * this.paper);
 					this.result.cover.width = ((width * 2) + spine).round();
 					this.result.page.width = width.round();
 					this.result.page.height = height.round();
