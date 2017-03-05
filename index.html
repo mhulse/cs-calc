@@ -44,7 +44,20 @@
 			-ms-flex-pack: center;
 			justify-content: center;
 		}
-		
+		a,
+		a:visited {
+			color: #cc0c39;
+			text-decoration: none;
+		}
+		a:visited:hover,
+		a:focus,
+		a:focus:hover,
+		a:hover,
+		a:active {
+			color: #1693a7;
+			text-decoration: underline;
+		}
+
 		#calculator {
 			width: 100%;
 			max-width: 640px;
@@ -95,6 +108,10 @@
 			font-size: smaller;
 			letter-spacing: .025em;
 			display: block;
+		}
+		footer p { margin: 20px 0 0; }
+		@media (min-width: 640px) {
+			footer p { margin-top: 50px; }
 		}
 		
 	</style>
@@ -171,21 +188,21 @@
 		
 		<p>
 			<b>Page</b>
-			<span title="{{ $data.width }} + {{ $data.bleed }}">{{ $data.result.page.width }}"</span>
+			<span>{{ $data.result.page.width }}"</span>
 			<span>X</span>
-			<span title="{{ $data.height }} + {{ $data.bleed }} + {{ $data.bleed }}">{{ $data.result.page.height }}"</span>
+			<span>{{ $data.result.page.height }}"</span>
 		</p>
 		
 		<p>
 			<b>Spine</b>
-			<span title="{{ $data.count }} x {{ $data.paper }}">{{ $data.result.spine.width }}"</span>
+			<span>{{ $data.result.spine.width }}"</span>
 			<span>X</span>
 			<span>{{ $data.result.cover.height }}"</span>
 		</p>
 		
 		<p>
 			<b>Cover</b>
-			<span title="{{ $data.result.page.width }} + {{ $data.result.page.width }} + {{ $data.result.spine.width }}">{{ $data.result.cover.width }}"</span>
+			<span>{{ $data.result.cover.width }}"</span>
 			<span>X</span>
 			<span>{{ $data.result.cover.height }}"</span>
 		</p>
@@ -196,8 +213,14 @@
 	
 </form>
 
+<footer>
+	
+	<p><a href="https://forums.createspace.com/en/community/message/391837" target="_blank">more info</a></p>
+	
+</footer>
+
 <script src="https://cdn.muicss.com/mui-0.9.5/js/mui.min.js"></script>
-<script src="https://unpkg.com/vue@2.1.3/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vue"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.4/numeral.min.js"></script>
 
@@ -234,17 +257,17 @@
 			paper: 0.002347,
 			count: 101,
 			result: {
-				spine: {
-					width: 1,
-				},
 				page: {
 					width: 1,
 					height: 1,
 				},
+				spine: {
+					width: 1,
+				},
 				cover: {
 					width: 1,
 					height: 1,
-				}
+				},
 			},
 		},
 		methods: {
