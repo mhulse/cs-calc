@@ -199,14 +199,37 @@
 <script src="https://cdn.muicss.com/mui-0.9.5/js/mui.min.js"></script>
 <script src="https://unpkg.com/vue@2.1.3/dist/vue.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.4/numeral.min.js"></script>
 
 <script>
+	
+	// Photoshop:
+	// 15.0015
+	// Becomes:
+	// 15.003
+	// Huh?
+	
+	// Indesign:
+	// 15.00015
+	// Becomes:
+	// 15.0002
+	// Ok, that’s better.
+	//
+	// 15.00014
+	// Becomes:
+	// 15.0001
+	
+	// http://stackoverflow.com/a/19722641/922323
+	Number.prototype.round = function(places) {
+		places = (places || 4);
+		return Number(Math.round(this + 'e+' + places) + 'e-' + places);
+	}
 	
 	new Vue({
 		el: '#calculator',
 		data: {
 			width: 8.5,
-			height: 8.5,
+			height: 11,
 			bleed: 0.125,
 			paper: 0.002347,
 			count: 101,
@@ -227,11 +250,14 @@
 		methods: {
 			calculate: function() {
 				this.$nextTick(function() {
-					var width = this.result.page.width = (this.width + this.bleed);
-					var height = this.result.page.height = (this.height + (this.bleed * 2));
-					var spine = this.result.spine.width = (this.count * this.paper);
-					this.result.cover.width = ((width * 2) + spine);
-					this.result.cover.height = height;
+					var width = (this.width + this.bleed);
+					var height = (this.height + (this.bleed * 2));
+					var spine = (this.count * this.paper);
+					this.result.cover.width = ((width * 2) + spine).round();
+					this.result.page.width = width.round();
+					this.result.page.height = height.round();
+					this.result.cover.height = height.round();
+					this.result.spine.width = spine.round();
 				});
 			},
 		},
